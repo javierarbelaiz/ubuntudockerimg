@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/rhel7
+FROM registry.access.redhat.com/rhel8
 MAINTAINER Red Hat Systems Engineering <refarch-feedback@redhat.com>
 
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
@@ -27,7 +27,7 @@ COPY help.md /tmp/
 COPY licenses /licenses
 
 ### Add necessary Red Hat repos here
-RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms \
+RUN REPOLIST=rhel-8-server-rpms,rhel-8-server-optional-rpms \
 ### Add your package needs here
     INSTALL_PKGS="golang-github-cpuguy83-go-md2man" && \
     yum -y update-minimal --disablerepo "*" --enablerepo rhel-7-server-rpms --setopt=tsflags=nodocs \
