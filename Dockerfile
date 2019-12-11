@@ -27,10 +27,10 @@ COPY help.md /tmp/
 COPY licenses /licenses
 
 ### Add necessary Red Hat repos here
-RUN REPOLIST=rhel7.7,rhel-8-server-optional-rpms \
+RUN REPOLIST=openshift,rhel-8-server-optional-rpms \
 ### Add your package needs here
     INSTALL_PKGS="golang-github-cpuguy83-go-md2man" && \
-    yum -y update-minimal --disablerepo "*" --enablerepo rhel7.7 --setopt=tsflags=nodocs \
+    yum -y update-minimal --disablerepo "*" --enablerepo openshift --setopt=tsflags=nodocs \
       --security --sec-severity=Important --sec-severity=Critical && \
     yum -y install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
 ### help file markdown to man conversion
