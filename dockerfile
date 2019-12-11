@@ -1,5 +1,3 @@
-FROM ubuntu:18.04
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends mysql-client \
-    && rm -rf /var/lib/apt/lists/*
+FROM alpine:3.7
+RUN apk add --no-cache mysql-client
 ENTRYPOINT ["mysql"]
