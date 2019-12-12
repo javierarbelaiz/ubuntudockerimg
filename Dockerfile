@@ -1,7 +1,8 @@
 FROM registry.access.redhat.com/rhel7
 MAINTAINER Red Hat Systems Engineering <refarch-feedback@redhat.com>
 
-### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
+### Atomic/OpenShift Labels - htt
+ps://github.com/projectatomic/ContainerApplicationGenericLabels
 LABEL name="acme/starter-arbitrary-uid" \
       maintainer="refarch-feedback@redhat.com" \
       vendor="Acme Corp" \
@@ -27,10 +28,10 @@ COPY help.md /tmp/
 COPY licenses /licenses
 
 ### Add necessary Red Hat repos here
-RUN REPOLIST=registry.redhat.io/rhel7/rhel \
+RUN REPOLIST=registry.access.redhat.com/rhel7 \
 ### Add your package needs here
     INSTALL_PKGS="golang-github-cpuguy83-go-md2man" && \
-    yum -y update-minimal --disablerepo "*" --enablerepo registry.redhat.io/rhel7/rhel --setopt=tsflags=nodocs \
+    yum -y update-minimal --disablerepo "*" --enablerepo epel-release --setopt=tsflags=nodocs \
       --security --sec-severity=Important --sec-severity=Critical && \
     yum -y install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
 ### help file markdown to man conversion
