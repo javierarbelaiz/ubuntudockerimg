@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/rhel7
+FROM centos:centos7
 MAINTAINER Red Hat Systems Engineering <refarch-feedback@redhat.com>
 
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
@@ -17,26 +17,10 @@ LABEL name="acme/starter-epel" \
       io.openshift.expose-services="" \
       io.openshift.tags="acme,starter-epel,starter,epel"
 
-### Atomic Help File - Write in Markdown, it will be converted to man format at build time.
-### https://github.com/projectatomic/container-best-practices/blob/master/creating/help.adoc
-COPY help.md /tmp/
-
-### add licenses to this directory
-COPY licenses /licenses
-
-### Add necessary Red Hat repos here
-RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,epel \
 ### Add your package needs here
-    INSTALL_PKGS="golang-github-cpuguy83-go-md2man \
-    jq" && \
-    yum -y update-minimal --disablerepo "*" --enablerepo rhel-7-server-rpms --setopt=tsflags=nodocs \
-      --security --sec-severity=Important --sec-severity=Critical && \
-    curl -o epel-release-latest-7.noarch.rpm -SL https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
-      --retry 5 --retry-max-time 0 -C - && \
-    yum -y localinstall epel-release-latest-7.noarch.rpm && rm epel-release-latest-7.noarch.rpm && \
-    yum -y install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
-### help file markdown to man conversion
-    go-md2man -in /tmp/help.md -out /help.1 && \
+RUN INSTALL_PKGS="jq" && \
+    yum -y install epel-release && \
+    yum -y install --setopt=tsflags=nodocs ${INSTALL_PKGS} && \
     yum clean all
 
 ### Setup user for build execution and application runtime
