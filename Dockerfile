@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos9
 MAINTAINER Red Hat Systems Engineering <refarch-feedback@redhat.com>
 
 ### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
