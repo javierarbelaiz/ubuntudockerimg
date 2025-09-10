@@ -1,0 +1,14 @@
+{
+  "instances": [
+    {
+      "name": "ORCL1",
+      "connectionString": "user/password@localhost:1521/orclpdb",
+      "monitor": true
+    },
+    {
+      "name": "ORCL2",
+      "connectionString": "user/password@remote:1521/orclpdb",
+      "monitor": false
+    }
+  ]
+}
